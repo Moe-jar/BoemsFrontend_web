@@ -1,5 +1,5 @@
-
-const API_BASE = "http://localhost:5132/api/Boems";
+const API_BASE = "https://sofismboemsapis-production.up.railway.app/api/Boems";
+const AUTHORS_API = "https://sofismboemsapis-production.up.railway.app/api/Authors";
 
 /* particles */
 const particlesEl = document.getElementById('particles');
@@ -21,10 +21,42 @@ const particlesEl = document.getElementById('particles');
   }
 })();
 
+/* helpers */
 function qs(id){ return document.getElementById(id) }
 function show(el){ el.classList.add('show'); el.setAttribute('aria-hidden','false') }
 function hide(el){ el.classList.remove('show'); el.setAttribute('aria-hidden','true') }
+function escapeHtml(s){
+  if(s==null) return '';
+  return String(s).replace(/[&<>"'`=\/]/g, function(c){ 
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;','/':'&#47;','=':'&#61;'}[c];
+  });
+}
+function formatPoemText(txt){
+  const parts = String(txt).split(/\r?\n/).map(line => `<div>${escapeHtml(line) || '<br>'}</div>`);
+  return parts.join('');
+}
 
+/* load authors dynamically for the dropdown */
+async function loadAuthors(){
+  const select = qs('quickAuthor');
+  try {
+    const res = await fetch(AUTHORS_API+'/All');
+    if(!res.ok) throw new Error('فشل جلب المؤلفين');
+    const authors = await res.json();
+    select.innerHTML = '<option value="">اختر المؤلف</option>';
+    authors.forEach(a => {
+      const opt = document.createElement('option');
+      opt.value = a.id ?? a.Id ?? a.ID;
+      opt.textContent = a.name ?? a.Name ?? 'بدون اسم';
+      select.appendChild(opt);
+    });
+  } catch(err){
+    select.innerHTML = `<option value="">خطأ: ${err.message}</option>`;
+    console.error(err);
+  }
+}
+
+/* search functionality */
 async function onSearch(){
   const keyword = qs('searchInput').value.trim();
   const results = qs('results');
@@ -48,7 +80,7 @@ async function onSearch(){
       const tile = document.createElement('div');
       tile.className = 'tile';
       const left = document.createElement('div');
-      left.innerHTML = `<div class="title">${escapeHtml(item.title || item.Title || 'بدون عنوان')}</div>
+      left.innerHTML = `<div class="title">${escapeHtml(item.title ?? item.Title ?? 'بدون عنوان')}</div>
                         <div class="meta">id: ${escapeHtml(item.id ?? item.Id ?? '')}</div>`;
       tile.appendChild(left);
       tile.onclick = ()=> loadById(item.id ?? item.Id ?? item.ID ?? item.ID);
@@ -61,6 +93,7 @@ async function onSearch(){
   }
 }
 
+/* load poem by id */
 async function loadById(id){
   if(!id){ alert('معرّف غير صالح'); return; }
   const view = qs('viewer');
@@ -83,6 +116,7 @@ async function loadById(id){
   }
 }
 
+/* add poem */
 async function onAdd(){
   const title = qs('quickTitle').value.trim();
   const text = qs('quickText').value.trim();
@@ -109,9 +143,8 @@ async function onAdd(){
 
     msg.style.color = '#bfffcf';
     msg.textContent = '✅ تمت إضافة القصيدة بنجاح';
-    qs('quickTitle').value = '';
-    qs('quickText').value = '';
-    qs('quickAuthor').value = '';
+    clearQuick();
+    loadAuthors(); // refresh authors in case new added
   } catch(err){
     msg.style.color = '#ffb4b4';
     msg.textContent = '❌ فشل الإضافة — ' + (err.message || '');
@@ -119,32 +152,34 @@ async function onAdd(){
   }
 }
 
+/* clear add form */
 function clearQuick(){
-  qs('quickTitle').value = ''; qs('quickText').value = ''; qs('quickAuthor').value = '';
+  qs('quickTitle').value = '';
+  qs('quickText').value = '';
+  qs('quickAuthor').value = '';
   qs('addMsg').textContent = '';
 }
 
+/* modal */
 qs('openAdd').addEventListener('click', ()=>{
   const quick = qs('quickTitle');
   quick.scrollIntoView({behavior:'smooth', block:'center'});
   quick.focus();
 });
-
 qs('viewer').addEventListener('click', (e)=>{
   if(e.target === qs('viewer')) closeViewer();
 });
 function closeViewer(){ hide(qs('viewer')); qs('viewBody').scrollTop = 0; }
 
-function escapeHtml(s){
-  if(s==null) return '';
-  return String(s).replace(/[&<>"'`=\/]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;','/':'&#47;','=':'&#61;'}[c];});
-}
-
-function formatPoemText(txt){
-  const parts = String(txt).split(/\r?\n/).map(line => `<div>${escapeHtml(line) || '<br>'}</div>`);
-  return parts.join('');
-}
-
+/* keyboard shortcuts */
 document.addEventListener('keydown', e=>{
-  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); qs('searchInput').focus(); }
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='k'){ 
+    e.preventDefault(); 
+    qs('searchInput').focus(); 
+  }
+});
+
+/* load authors on page load */
+document.addEventListener('DOMContentLoaded', () => {
+  loadAuthors();
 });

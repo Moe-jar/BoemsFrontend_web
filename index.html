@@ -4,13 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="stylesheet" href="style.css">
-
 <title>ديوان الصوفية — تفاعل بالأخضر</title>
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Amiri&display=swap" rel="stylesheet">
-
-
 
 </head>
 <body>
@@ -30,7 +27,7 @@
 
     <div class="controls">
       <div class="search" role="search">
-        <input id="searchInput" placeholder="اكتب كلمة في عنوان القصيدة ثم اضغط Enter أو زر البحث" onkeydown="if(event.key==='Enter'){onSearch()}">
+        <input id="searchInput" placeholder="اكتب كلمة في عنوان القصيدة ثم اضغط Enter أو زر البحث">
         <button title="ابحث" onclick="onSearch()">🔎</button>
       </div>
       <button class="btn-add" id="openAdd" title="أضف قصيدة جديدة">✚ إضافة قصيدة</button>
@@ -57,19 +54,25 @@
       </div>
 
       <div class="card" id="quickAdd">
-        <h3>أضف بسرعة</h3>
-        <label>العنوان</label>
-        <input id="quickTitle" type="text" placeholder="مثال: نور الحب">
-        <label>النص</label>
-        <textarea id="quickText" placeholder="هنا نص القصيدة..."></textarea>
-        <label>Author ID</label>
-        <input id="quickAuthor" type="number" placeholder="مثال: 1">
-        <div class="form-actions">
-          <button class="btn-submit" onclick="onAdd()">إضافة الآن</button>
-          <button class="btn-clear" onclick="clearQuick()">مسح</button>
-        </div>
-        <p id="addMsg" style="margin:8px 0 0 0;color:var(--accent-2)"></p>
-      </div>
+    <h3>أضف بسرعة</h3>
+    <label>العنوان</label>
+    <input id="quickTitle" type="text" placeholder="مثال: نور الحب">
+
+    <label>النص</label>
+    <textarea id="quickText" placeholder="هنا نص القصيدة..."></textarea>
+
+    <label for="quickAuthor">المؤلف</label>
+    <select id="quickAuthor">
+        <option value="">اختر المؤلف</option>
+        <!-- سيتم ملء الخيارات بواسطة JavaScript -->
+    </select>
+
+    <div class="form-actions">
+        <button class="btn-submit" onclick="onAdd()">إضافة الآن</button>
+        <button class="btn-clear" onclick="clearQuick()">مسح</button>
+    </div>
+    <p id="addMsg" style="margin:8px 0 0 0;color:var(--accent-2)"></p>
+</div>
     </aside>
   </section>
 </div>
@@ -83,11 +86,13 @@
         <button class="close" onclick="closeViewer()">✕</button>
       </div>
     </div>
-    <div id="viewBody" class="poem-body">نص القصيدة سيظهر هنا...</div>
+    <div id="viewBody" class="poem-body">
+      نص القصيدة سيظهر هنا...
+      <!-- Boss actions dynamically injected here if user is 'boss' -->
+    </div>
   </div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
