@@ -150,8 +150,15 @@ textarea{min-height:120px;resize:vertical;padding-top:12px}
 
 /* poem viewer modal */
 .modal {
-    position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:999;
-    background:linear-gradient(rgba(2,10,6,0.6), rgba(2,10,6,0.85));
+      
+    backdrop-filter: blur(6px);
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95));
 }
 .modal.show{display:flex}
 .modal-card{
