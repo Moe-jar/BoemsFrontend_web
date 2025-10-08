@@ -8,7 +8,6 @@
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Amiri&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
@@ -29,6 +28,7 @@
       <div class="search" role="search">
         <input id="searchInput" placeholder="اكتب كلمة في عنوان القصيدة ثم اضغط Enter أو زر البحث">
         <button title="ابحث" onclick="onSearch()">🔎</button>
+        <button id="btnCurrent" title="القصيدة الحالية" onclick="onCurrent()">📜 القصيدة الحالية</button>
       </div>
       <button class="btn-add" id="openAdd" title="أضف قصيدة جديدة">✚ إضافة قصيدة</button>
     </div>
@@ -39,7 +39,9 @@
     <div class="panel">
       <h2>نتائج البحث</h2>
       <div id="results" class="results">
-        <div style="color:rgba(255,255,255,0.6);padding:12px">ابحث عن عنوان لبدء عرض النتائج...</div>
+        <div style="color:rgba(255,255,255,0.6);padding:12px">
+          ابحث عن عنوان لبدء عرض النتائج...
+        </div>
       </div>
     </div>
 
@@ -54,25 +56,25 @@
       </div>
 
       <div class="card" id="quickAdd">
-    <h3>أضف بسرعة</h3>
-    <label>العنوان</label>
-    <input id="quickTitle" type="text" placeholder="مثال: نور الحب">
+        <h3>أضف بسرعة</h3>
+        <label>العنوان</label>
+        <input id="quickTitle" type="text" placeholder="مثال: نور الحب">
 
-    <label>النص</label>
-    <textarea id="quickText" placeholder="هنا نص القصيدة..."></textarea>
+        <label>النص</label>
+        <textarea id="quickText" placeholder="هنا نص القصيدة..."></textarea>
 
-    <label for="quickAuthor">المؤلف</label>
-    <select id="quickAuthor">
-        <option value="">اختر المؤلف</option>
-        <!-- سيتم ملء الخيارات بواسطة JavaScript -->
-    </select>
+        <label for="quickAuthor">المؤلف</label>
+        <select id="quickAuthor">
+          <option value="">اختر المؤلف</option>
+          <!-- سيتم ملء الخيارات بواسطة JavaScript -->
+        </select>
 
-    <div class="form-actions">
-        <button class="btn-submit" onclick="onAdd()">إضافة الآن</button>
-        <button class="btn-clear" onclick="clearQuick()">مسح</button>
-    </div>
-    <p id="addMsg" style="margin:8px 0 0 0;color:var(--accent-2)"></p>
-</div>
+        <div class="form-actions">
+          <button class="btn-submit" onclick="onAdd()">إضافة الآن</button>
+          <button class="btn-clear" onclick="clearQuick()">مسح</button>
+        </div>
+        <p id="addMsg" style="margin:8px 0 0 0;color:var(--accent-2)"></p>
+      </div>
     </aside>
   </section>
 </div>
@@ -88,8 +90,22 @@
     </div>
     <div id="viewBody" class="poem-body">
       نص القصيدة سيظهر هنا...
-      <!-- Boss actions dynamically injected here if user is 'boss' -->
     </div>
+  </div>
+</div>
+
+<!-- confirm modal for "عرض القصيدة للجميع؟" -->
+<div id="confirmModal" class="modal" aria-hidden="true">
+  <div class="modal-card small">
+    <h3>عرض القصيدة للجميع؟</h3>
+    <p>هل ترغب في جعل هذه القصيدة هي القصيدة الحالية؟</p>
+    <label>اسم المستخدم</label>
+    <input id="usernameInput" type="text" placeholder="أدخل اسم المستخدم">
+    <div class="form-actions">
+      <button class="btn-submit" onclick="confirmSetAsCurrent()">تأكيد</button>
+      <button class="btn-clear" onclick="closeConfirm()">إلغاء</button>
+    </div>
+    <p id="confirmMsg" class="status-msg"></p>
   </div>
 </div>
 
