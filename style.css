@@ -201,3 +201,135 @@ select#quickAuthor option {
     .aside{order:2}
     .panel{order:1}
 }
+/* =========================================
+   Enhanced mobile experience
+   ========================================= */
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .wrap {
+    margin: 20px auto;
+    padding: 16px;
+  }
+
+  header.appbar {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logo {
+    width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  p.tag {
+    font-size: 13px;
+  }
+
+  .controls {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .search {
+    min-width: unset;
+    width: 100%;
+    flex: none;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .search input {
+    font-size: 15px;
+    padding: 8px;
+  }
+
+  .search button {
+    padding: 8px 10px;
+    font-size: 16px;
+  }
+
+  .btn-add {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .panel, .aside, .card {
+    padding: 14px;
+  }
+
+  .panel h2, .card h3 {
+    font-size: 16px;
+  }
+
+  .tile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .tile .title {
+    font-size: 16px;
+  }
+
+  .tile .meta {
+    font-size: 12px;
+  }
+
+  input[type=text],
+  textarea,
+  select {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-submit,
+  .btn-clear {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .modal-card {
+    width: 92%;
+    padding: 16px;
+  }
+
+  .poem-body {
+    font-size: 16px;
+    max-height: 70vh;
+    line-height: 1.8;
+  }
+}
