@@ -13,12 +13,14 @@ html,body{height:100%}
 body{
     margin:0;
     font-family: "Cairo", "Amiri", system-ui, sans-serif;
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(0,0,0,0.08), transparent 5%),
-                linear-gradient(135deg,var(--bg-1),var(--bg-2));
+    background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(0,0,0,0.08), transparent 5%),
+        linear-gradient(135deg,var(--bg-1),var(--bg-2));
     color:var(--muted);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     overflow-y:auto;
+    min-height:100vh; /* 🔧 fix: ensures full coverage */
 }
 
 /* soft floating particles background */
@@ -28,6 +30,7 @@ body{
     pointer-events:none;
     z-index:0;
     overflow:hidden;
+    background:linear-gradient(135deg,var(--bg-1),var(--bg-2)); /* 🔧 fix: fill behind blur */
 }
 .particle{
     position:absolute;
@@ -150,22 +153,21 @@ textarea{min-height:120px;resize:vertical;padding-top:12px}
 
 /* poem viewer modal */
 .modal {
-      
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
     position: fixed;
     inset: 0;
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 999;
-    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95));
+    background: rgba(0,0,0,0.9); /* 🔧 fix: darker, uniform overlay */
 }
 .modal.show{display:flex}
 .modal-card{
     width:min(880px,94%);max-height:86vh;overflow:hidden;border-radius:18px;padding:20px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-    box-shadow:0 30px 80px rgba(0,0,0,0.6);position:relative;
-    border:1px solid rgba(255,255,255,0.04);
+    background:rgba(0,0,0,0.45); /* 🔧 fix: stronger dark background */
+    box-shadow:0 30px 80px rgba(0,0,0,0.7);position:relative;
+    border:1px solid rgba(255,255,255,0.05);
 }
 .modal-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .modal-header h3{margin:0;color:var(--accent-2)}
@@ -175,6 +177,9 @@ textarea{min-height:120px;resize:vertical;padding-top:12px}
 .poem-body{
     margin-top:14px;padding-right:6px;overflow:auto;max-height:62vh;line-height:2;font-size:18px;
     color:var(--muted);
+    background:rgba(0,0,0,0.35); /* 🔧 fix: subtle dark background for clarity */
+    border-radius:12px;
+    padding:14px;
 }
 
 /* Styled author select */
@@ -184,7 +189,7 @@ select#quickAuthor {
     border-radius: 10px;
     border: 0;
     background: rgba(0,0,0,0.25);
-    color: #ffffff; /* force text to white */
+    color: #ffffff;
     font-size: 14px;
     outline: none;
     appearance: none;
@@ -196,7 +201,6 @@ select#quickAuthor {
     background-size: 10px 5px;
     cursor: pointer;
 }
-/* Ensure dropdown options are readable */
 select#quickAuthor option {
     background: var(--bg-2);
     color: var(--muted);
@@ -208,9 +212,8 @@ select#quickAuthor option {
     .aside{order:2}
     .panel{order:1}
 }
-/* =========================================
-   Enhanced mobile experience
-   ========================================= */
+
+/* Enhanced mobile experience */
 @media (max-width: 600px) {
   body {
     font-size: 15px;
