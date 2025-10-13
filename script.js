@@ -1,11 +1,12 @@
-const API_BASE = "https://sofismboemsapis-production.up.railway.app/api/Boems";
-const AUTHORS_API = "https://sofismboemsapis-production.up.railway.app/api/Authors";
-
 
 /*
 const API_BASE = "http://localhost:5132/api/Boems";
 const AUTHORS_API = "http://localhost:5132/api/Authors";
+
+
 */
+const API_BASE =    "https://sofismboemsapis-production.up.railway.app/api/Boems";
+const AUTHORS_API = "https://sofismboemsapis-production.up.railway.app/api/Authors";
 
 /* particles */
 const particlesEl = document.getElementById('particles');

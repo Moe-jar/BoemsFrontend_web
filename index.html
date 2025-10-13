@@ -26,11 +26,12 @@
 
     <div class="controls">
       <div class="search" role="search">
-        <input id="searchInput" placeholder="اكتب كلمة في عنوان القصيدة ثم اضغط Enter أو زر البحث">
+        <input id="searchInput" placeholder="اكتب كلمة من عنوان القصيدة ثم اضغط زر البحث">
         <button title="ابحث" onclick="onSearch()">🔎</button>
-        <button id="btnCurrent" title="القصيدة الحالية" onclick="onCurrent()">📜 القصيدة الحالية</button>
       </div>
-      <button class="btn-add" id="openAdd" title="أضف قصيدة جديدة">✚ إضافة قصيدة</button>
+      <!-- <button class="btn-add" id="openAdd" title="أضف قصيدة جديدة">✚ إضافة قصيدة</button>-->
+      <button id="btnCurrent" title="القصيدة الحالية" onclick="onCurrent()">📜 القصيدة الحالية</button>
+
     </div>
   </header>
 
@@ -40,12 +41,13 @@
       <h2>نتائج البحث</h2>
       <div id="results" class="results">
         <div style="color:rgba(255,255,255,0.6);padding:12px">
-          ابحث عن عنوان لبدء عرض النتائج...
+          ابحث عن عنوان لبدء عرض النتائج أو اضغط زر القصيدة الحالية لعرض آخر قصيدة تم اختيارها من قبل المنشد الرئيسي ....
         </div>
       </div>
     </div>
 
     <!-- right: add form / tips -->
+    <!--
     <aside class="aside">
       <div class="card">
         <h3>التعليمات السريعة</h3>
@@ -53,8 +55,9 @@
           اكتب كلمة من العنوان في مربع البحث → اضغط بحث → اختر نتيجة لعرض النص كاملًا (النافذة قابلة للتمرير).
           لإضافة قصيدة جديدة اضغط "إضافة قصيدة".
         </p>
-      </div>
+      </div>-->
 
+      <!--
       <div class="card" id="quickAdd">
         <h3>أضف بسرعة</h3>
         <label>العنوان</label>
@@ -66,9 +69,9 @@
         <label for="quickAuthor">المؤلف</label>
         <select id="quickAuthor">
           <option value="">اختر المؤلف</option>
-          <!-- سيتم ملء الخيارات بواسطة JavaScript -->
-        </select>
-
+          <!-- سيتم ملء الخيارات بواسطة JavaScript 
+        </select> -->
+<!-- 
         <div class="form-actions">
           <button class="btn-submit" onclick="onAdd()">إضافة الآن</button>
           <button class="btn-clear" onclick="clearQuick()">مسح</button>
@@ -77,7 +80,7 @@
       </div>
     </aside>
   </section>
-</div>
+</div> -->
 
 <!-- modal viewer -->
 <div id="viewer" class="modal" aria-hidden="true">
