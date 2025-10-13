@@ -231,7 +231,7 @@ textarea { min-height: 120px; resize: vertical; padding-top: 12px }
     margin-right: 6px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 22px;
+    font-size: 18px;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 #btnCurrent:hover {
