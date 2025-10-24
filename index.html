@@ -1,124 +1,88 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="stylesheet" href="style.css">
-<title>ديوان الصوفية</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <title>ديوان الصوفية</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Amiri&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Amiri&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-180.png">
-<!-- For Android / Chrome -->
- <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
- <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon-180.png" />
+    <!-- For Android / Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
+  </head>
+  <body>
+    <div class="particles" id="particles"></div>
 
-</head>
-<body>
-
-<!-- particles -->
-<div class="particles" id="particles"></div>
-
-<div class="wrap">
-  <header class="appbar">
-    <div class="brand">
-      <div class="logo">د</div>
-      <div>
-        <h1>ديوان الصوفية</h1>
-        <p class="tag">قصائد تفاعلية — ابحث، أضف، واقرأ بصفاء</p>
-      </div>
-    </div>
-
-    <div class="controls">
-      <div class="search" role="search">
-        <input id="searchInput" placeholder="ابحث عن عنوان قصيدة ...">
-        <button title="ابحث" onclick="onSearch()">🔎</button>
-      </div>
-      <!-- <button class="btn-add" id="openAdd" title="أضف قصيدة جديدة">✚ إضافة قصيدة</button>-->
-      <button id="btnCurrent" title="القصيدة الحالية" onclick="onCurrent()">📜 القصيدة الحالية</button>
-
-    </div>
-  </header>
-
-  <section class="content">
-    <!-- left: results -->
-    <div class="panel">
-      <h2>نتائج البحث</h2>
-      <div id="results" class="results">
-        <div style="color:rgba(255,255,255,0.6);padding:12px">
-          ابحث عن عنوان لبدء عرض النتائج أو اضغط زر القصيدة الحالية لعرض آخر قصيدة تم اختيارها من قبل المنشد الرئيسي ....
+    <div class="wrap">
+      <header class="appbar">
+        <div class="brand">
+          <div class="logo">د</div>
+          <div>
+            <h1>ديوان الصوفية</h1>
+            <p class="tag">قصائد تفاعلية — ابحث واقرأ بصفاء</p>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- right: add form / tips -->
-    <!--
-    <aside class="aside">
-      <div class="card">
-        <h3>التعليمات السريعة</h3>
-        <p style="color:rgba(255,255,255,0.7);font-size:14px">
-          اكتب كلمة من العنوان في مربع البحث → اضغط بحث → اختر نتيجة لعرض النص كاملًا (النافذة قابلة للتمرير).
-          لإضافة قصيدة جديدة اضغط "إضافة قصيدة".
-        </p>
-      </div>-->
+        <div class="controls">
+          <div class="search">
+            <input
+              id="searchInput"
+              placeholder="اكتب كلمة من عنوان القصيدة ثم اضغط 🔎"
+            />
+            <button title="ابحث" onclick="onSearch()">🔎</button>
+          </div>
 
-      <!--
-      <div class="card" id="quickAdd">
-        <h3>أضف بسرعة</h3>
-        <label>العنوان</label>
-        <input id="quickTitle" type="text" placeholder="مثال: نور الحب">
-
-        <label>النص</label>
-        <textarea id="quickText" placeholder="هنا نص القصيدة..."></textarea>
-
-        <label for="quickAuthor">المؤلف</label>
-        <select id="quickAuthor">
-          <option value="">اختر المؤلف</option>
-          <!-- سيتم ملء الخيارات بواسطة JavaScript 
-        </select> -->
-<!-- 
-        <div class="form-actions">
-          <button class="btn-submit" onclick="onAdd()">إضافة الآن</button>
-          <button class="btn-clear" onclick="clearQuick()">مسح</button>
+          <button class="btn-action" id="btnCurrentPoem" onclick="onCurrent()">
+            📜 القصيدة الحالية
+          </button>
+          <button
+            class="btn-action"
+            id="btnCurrentLink"
+            onclick="onCurrentList()"
+          >
+            🔗 الوصلة الحالية
+          </button>
+          <button class="btn-action" id="btnAll" onclick="onAllPoems()">
+            📚 عرض الكل
+          </button>
         </div>
-        <p id="addMsg" style="margin:8px 0 0 0;color:var(--accent-2)"></p>
+      </header>
+
+      <section class="content">
+        <div class="panel">
+          <h2>نتائج البحث</h2>
+          <div id="results" class="results">
+            <div style="color: rgba(255, 255, 255, 0.6); padding: 12px">
+              ابحث عن عنوان لبدء عرض النتائج أو اضغط زر القصيدة الحالية لعرض آخر
+              قصيدة مختارة...
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- modal viewer -->
+    <div id="viewer" class="modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <h3 id="viewTitle">عنوان القصيدة</h3>
+          <button class="close" onclick="closeViewer()">✕</button>
+        </div>
+        <div id="viewBody" class="poem-body">نص القصيدة سيظهر هنا...</div>
       </div>
-    </aside>
-  </section>
-</div> -->
-
-<!-- modal viewer -->
-<div id="viewer" class="modal" aria-hidden="true">
-  <div class="modal-card" role="dialog" aria-modal="true">
-    <div class="modal-header">
-      <h3 id="viewTitle">عنوان القصيدة</h3>
-      <div>
-        <button class="close" onclick="closeViewer()">✕</button>
-      </div>
     </div>
-    <div id="viewBody" class="poem-body">
-      نص القصيدة سيظهر هنا...
-    </div>
-  </div>
-</div>
 
-<!-- confirm modal for "عرض القصيدة للجميع؟" -->
-<div id="confirmModal" class="modal" aria-hidden="true">
-  <div class="modal-card small">
-    <h3>عرض القصيدة للجميع؟</h3>
-    <p>هل ترغب في جعل هذه القصيدة هي القصيدة الحالية؟</p>
-    <label>اسم المستخدم</label>
-    <input id="usernameInput" type="text" placeholder="أدخل اسم المستخدم">
-    <div class="form-actions">
-      <button class="btn-submit" onclick="confirmSetAsCurrent()">تأكيد</button>
-      <button class="btn-clear" onclick="closeConfirm()">إلغاء</button>
-    </div>
-    <p id="confirmMsg" class="status-msg"></p>
-  </div>
-</div>
+    <!-- confirm modal -->
+    <div id="confirmModal" class="modal" aria-hidden="true"></div>
 
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
